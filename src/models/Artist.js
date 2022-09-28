@@ -8,4 +8,4 @@ const ArtistsShema = mongoose.Schema({
   image: String,
 });
 
-module.exports = mongoose.model('Artists', ArtistShema);
+module.exports = mongoose.model('Artists', ArtistsShema);
