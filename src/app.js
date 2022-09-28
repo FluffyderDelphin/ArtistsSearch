@@ -12,7 +12,7 @@ mongoose.connect(process.env.DB_CONNECTION, console.log('connected to DB'));
 const artistSearchRoute = require('./routes/search');
 app.use('/artists.search', artistSearchRoute);
 
-// Setting up post  Route
+// Setting up post  Route to have some Data to work with
 const artistPostRoute = require('./routes/post');
 app.use('/artists.post', artistPostRoute);
 

@@ -6,8 +6,9 @@ const path = require('path');
 
 const Artist = require('../models/Artist');
 
-router.get('/:artistName', async (req, res) => {
+router.get('/:artistName/:filename', async (req, res) => {
   const param = req.params.artistName;
+  const filename = req.params.filename;
   try {
     const artist = await Artist.findOne({ name: param });
     if (!artist) {
@@ -19,10 +20,10 @@ router.get('/:artistName', async (req, res) => {
       //converting json to csv
       const csv = await converter.json2csvAsync(artist);
       //checks if there is already an csv file
-      if (!fs.existsSync('src/data/csv/data.csv')) {
-        fs.writeFileSync('src/data/csv/data.csv', csv);
+      if (!fs.existsSync(`src/data/csv/${filename}.csv`)) {
+        fs.writeFileSync(`src/data/csv/${filename}.csv`, csv);
       } else {
-        fs.appendFileSync('src/data/csv/data.csv', csv);
+        fs.appendFileSync(`src/data/csv/${filename}.csv`, csv);
       }
 
       res.json(artist);
