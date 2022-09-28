@@ -18,7 +18,13 @@ router.get('/:artistName', async (req, res) => {
     } else {
       //converting json to csv
       const csv = await converter.json2csvAsync(artist);
-      fs.writeFileSync('src/data/csv/data.csv', csv);
+      //checks if there is already an csv file
+      if (!fs.existsSync('src/data/csv/data.csv')) {
+        fs.writeFileSync('src/data/csv/data.csv', csv);
+      } else {
+        fs.appendFileSync('src/data/csv/data.csv', csv);
+      }
+
       res.json(artist);
     }
   } catch (err) {
