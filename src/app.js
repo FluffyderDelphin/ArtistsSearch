@@ -8,7 +8,13 @@ require('dotenv/config');
 
 mongoose.connect(process.env.DB_CONNECTION, console.log('connected to DB'));
 
-const artistSearch = require('./routes/search');
+// Setting up search Route
+const artistSearchRoute = require('./routes/search');
+app.use('/artists.search', artistSearchRoute);
+
+// Setting up post  Route
+const artistPostRoute = require('./routes/post');
+app.use('/artists.post', artistPostRoute);
 
 //runs localy on localhost:8080
 app.listen(8080);
